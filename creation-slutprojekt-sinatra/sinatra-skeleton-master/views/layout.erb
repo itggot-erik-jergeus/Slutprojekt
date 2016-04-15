@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SuperAwesomeWebsite</title>
+  <link type="text/css" rel="stylesheet" href="/css/layout.css">
+</head>
+<body>
+  <div id="login_signup">
+    <table class="tab">
+      <tr>
+        <td class="user_btn"><form action="/login" method="post"><button class="btn-neutral" type="submit">Log In</button></form></td>
+        <td class="parent_btn"><form action="/parent_login" method="post"><button class="btn-neutral" type="submit">Parent Log In</button></form></td>
+      </tr>
+      <tr>
+        <td class="user_btn"><form action="/signup" method="post"><button class="btn-green" type="submit">Sign Up</button></form></td>
+        <td class="parent_btn"><form action="/parent_sign_up" method="post"><button class="btn-green" type="submit">Parent Sign Up</button></form></td>
+      </tr>
+    </table>
+  </div>
+<%= yield %>
+</body>
+</html>

@@ -1,0 +1,30 @@
+body {
+    background-color: black;
+}
+.tab {
+    margin-left: auto;
+    margin-right: auto;
+}
+.user_btn {
+    float: right;
+}
+.btn-neutral {
+    font-size: inherit;
+    font-weight: 600;
+    line-height: 1.5;
+    width: 8em;
+    color: #d1d1d1;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
+    background-color: #686b43;
+    border-color: #949763;
+}
+.btn-green {
+    font-size: inherit;
+    font-weight: 600;
+    line-height: 1.5;
+    width: 9em;
+    color: #545454;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
+    background-color: #6cc644;
+    border-color: #81de46;
+}

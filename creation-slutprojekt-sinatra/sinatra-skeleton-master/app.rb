@@ -3,6 +3,8 @@ class App < Sinatra::Base
 
   get '/' do
   	"Hello, Sinatra!"
+
+    erb :homepage
   end
 
 
