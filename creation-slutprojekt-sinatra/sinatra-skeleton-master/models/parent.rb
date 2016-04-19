@@ -3,7 +3,7 @@ class Parent
 
   property :id, Serial
   property :username, String, required: true, unique: true
-  property :password, String, required: true
+  property :password, BCryptHash, required: true
   property :email_address, String, required: true, unique: true
   property :details, Text
 

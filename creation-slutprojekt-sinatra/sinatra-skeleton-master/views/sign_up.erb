@@ -1,1 +1,13 @@
-<h2></h2>
+<div class="sign_up">
+  <form action="/sign_up/create" method="post" id="sign_up_form">
+    <div class="form_row"><label class="sign_up_labels">Username: </label><input type="text" name="username"></div>
+    <div class="requirements">* (a-z, A-Z, 0-9, _)</div>
+    <div class="form_row"><label class="sign_up_labels">Password: </label><input type="text" name="password"></div>
+    <div class="requirements">* (a-z, A-Z, 0-9, Special Characters)</div>
+    <div class="form_row"><label class="sign_up_labels">Email: </label><input type="text" name="email"></div>
+    <div class="requirements">*</div>
+    <div class="form_row"><label class="sign_up_labels">Details: </label><input type="text" name="details"></div>
+    <div class="form_row"><label class="sign_up_labels">Parent Account: </label><input type="checkbox" name="parent_account" value="parent"></div>
+    <button type="submit">Sign Up</button>
+  </form>
+</div>

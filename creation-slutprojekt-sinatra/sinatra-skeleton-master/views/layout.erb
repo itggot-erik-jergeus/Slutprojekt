@@ -6,18 +6,30 @@
   <link type="text/css" rel="stylesheet" href="/css/layout.css">
 </head>
 <body>
-  <div id="login_signup">
-    <table class="tab">
-      <tr>
-        <td class="user_btn"><form action="/login" method="post"><button class="btn-neutral" type="submit">Log In</button></form></td>
-        <td class="parent_btn"><form action="/parent_login" method="post"><button class="btn-neutral" type="submit">Parent Log In</button></form></td>
-      </tr>
-      <tr>
-        <td class="user_btn"><form action="/signup" method="post"><button class="btn-green" type="submit">Sign Up</button></form></td>
-        <td class="parent_btn"><form action="/parent_sign_up" method="post"><button class="btn-green" type="submit">Parent Sign Up</button></form></td>
-      </tr>
-    </table>
-  </div>
+  <% if @user || @parent %>
+    <div id="tabobjects">
+      <ul>
+        <li><a href="events">Upcoming Events</a></li>
+        <li><a href="newactivity">Add New Activity</a></li>
+        <li><a href="parentmanagement">Manage Parents</a></li>
+        <li><a href="profile">My Profile</a></li>
+        <li><a href="log_out">Log Out</a></li>
+      </ul>
+    </div>
+  <% else %>
+    <div>
+      <table class="tab">
+        <tr>
+          <td class="user_btn"><form action="/login" method="get"><button class="btn-neutral" type="submit">Log In</button></form></td>
+          <!--<td class="parent_btn"><form action="/parent_login" method="get"><button class="btn-neutral" type="submit">Parent Log In</button></form></td>-->
+        </tr>
+        <tr>
+          <td class="user_btn"><form action="/sign_up" method="get"><button class="btn-green" type="submit">Sign Up</button></form></td>
+          <!--<td class="parent_btn"><form action="/parent_sign_up" method="get"><button class="btn-green" type="submit">Parent Sign Up</button></form></td>-->
+        </tr>
+      </table>
+    </div>
+  <% end %>
 <%= yield %>
 </body>
 </html>
