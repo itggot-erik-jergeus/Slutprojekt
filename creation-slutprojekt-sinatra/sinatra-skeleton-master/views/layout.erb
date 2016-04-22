@@ -9,13 +9,18 @@
   <% if @user || @parent %>
     <div id="tabobjects">
       <ul>
-        <li><a href="events">Upcoming Events</a></li>
-        <li><a href="newactivity">Add New Activity</a></li>
-        <li><a href="parentmanagement">Manage Parents</a></li>
+        <li><a href="activities">Upcoming Events</a></li>
+        <li><a href="new_activity">Add New Activity</a></li>
+        <li><a href="parent_management">Manage Parents</a></li>
         <li><a href="profile">My Profile</a></li>
-        <li><a href="log_out">Log Out</a></li>
+        <li><form action="/log_out" method="post"><button type="submit">Log Out</button></form></li>
       </ul>
     </div>
+  <% if @event %>
+    <div class="event_form">Simple Form</div>
+    <div class="event_form">Calendar Form</div>
+    <div class="event_date"><%= Time.now %></div>
+  <% end%>
   <% else %>
     <div>
       <table class="tab">
