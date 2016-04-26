@@ -9,7 +9,7 @@
   <% if @user || @parent %>
     <div id="tabobjects">
       <ul>
-        <li><a href="activities">Upcoming Events</a></li>
+        <li><a href="activities/simple">Upcoming Events</a></li>
         <li><a href="new_activity">Add New Activity</a></li>
         <li><a href="parent_management">Manage Parents</a></li>
         <li><a href="profile">My Profile</a></li>
@@ -17,8 +17,12 @@
       </ul>
     </div>
   <% if @event %>
-    <div class="event_form">Simple Form</div>
-    <div class="event_form">Calendar Form</div>
+    <form action="/activities/simple" method="get">
+      <div class="event_form"><input type="submit" value="Simple Form"></div>
+    </form>
+    <form action="/activities/calendar" method="get">
+      <div class="event_form"><input type="submit" value="Calendar Form"></div>
+    </form>
     <div class="event_date"><%= Time.now %></div>
   <% end%>
   <% else %>

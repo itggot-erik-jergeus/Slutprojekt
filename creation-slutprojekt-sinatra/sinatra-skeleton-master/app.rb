@@ -60,13 +60,27 @@ class App < Sinatra::Base
     redirect '/'
   end
 
-  get '/activities' do
+  get '/activities/simple' do
     if session[:user_id]
       @user = User.get(session[:user_id])
+      @activity = Activity.all(user_id: session[:user_id])
     elsif session[:parent_id]
       @parent = Parent.get(session[:parent_id])
     end
     @event = true
+    @simple = true
+    erb :activity
+  end
+
+  get '/activities/calendar' do
+    if session[:user_id]
+      @user = User.get(session[:user_id])
+      @activity = Activity.all(user_id: session[:user_id])
+    elsif session[:parent_id]
+      @parent = Parent.get(session[:parent_id])
+    end
+    @event = true
+    @simple = true
     erb :activity
   end
 
@@ -84,19 +98,32 @@ class App < Sinatra::Base
   end
 
   post '/create_activity' do
-    if session[:user_id]
-      parent = false
-    else
-      parent = true
-    end
     if params[:hidden_activity] == "hidden"
       hidden = true
     else
       hidden = false
     end
-    Activity.create(title: params[:title], type: params[:type], subject: params[:subject], date: params[:due_date], planning: params[:planning], hidden: hidden, parent: parent)
-    redirect '/activities'
+    if session[:user_id]
+      parent = false
+      Activity.create(title: params[:title], type: params[:type], subject: params[:subject],
+                      date: params[:due_date], planning: params[:planning],
+                      hidden: hidden, parent: parent, user_id: session[:user_id] )
+    else
+      parent = true
+      # Activity.create(title: params[:title], type: params[:type], subject: params[:subject],
+      #                 date: params[:due_date], planning: params[:planning],
+      #                 hidden: hidden, parent: parent, user_id: session[:parent_id] )
+    end
+    redirect '/activities/simple'
   end
 
+  get '/parent_management' do
+    erb :parent_management
+  end
 
+  post '/parent_validation' do
+    @parent = Parent.first(username: params[:name])
+    p @parent
+    redirect back
+  end
 end
