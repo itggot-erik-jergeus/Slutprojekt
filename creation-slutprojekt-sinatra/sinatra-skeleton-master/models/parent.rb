@@ -8,5 +8,6 @@ class Parent
   property :details, Text
 
   has n, :relations
+  has n, :user_requests
   has n, :users, through: :relations
 end

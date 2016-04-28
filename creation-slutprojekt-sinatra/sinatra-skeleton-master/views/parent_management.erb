@@ -1,16 +1,17 @@
 <h1>Add Parent</h1>
 <form action="/parent_validation" method="post">
   <div class="management_form">
+    <p><%= @parent %></p>
     <label class="management_labels">Username: </label>
     <input type="text" name="name" placeholder="Username">
     <button type="submit">Find</button></div>
 </form>
-<% if @parent != nil %>
-  <h3><%= @parent.username %></h3>
-  <p><%= @parent.details %></p>
-  <form action="/user_request" method="post">
+<% if @parent_search != nil %>
+  <h3><%= @parent_search.username %></h3>
+  <p><%= @parent_search.details %></p>
+  <form action=<%= if @user then "/user_request" else "/parent_request" end%> method="post">
     <div class="management_form">
-      <input type="submit" name="request" placeholder="Request Supervision"></div>
+      <input type="submit" name="request" value="Request Supervision"></div>
   </form>
 <% end %>
 <h1>Current Parents</h1>

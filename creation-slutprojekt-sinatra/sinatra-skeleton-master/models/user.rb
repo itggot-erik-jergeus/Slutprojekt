@@ -8,8 +8,14 @@ class User
   property :details, Text
   property :planning, String
 
+  # def self.request(app:, user:, parent_search:)
+  #
+  #
+  # end
+
   has n, :relations
   has n, :activities
   has n, :plans
+  has n, :parent_requests
   has n, :parents, through: :relations
 end
