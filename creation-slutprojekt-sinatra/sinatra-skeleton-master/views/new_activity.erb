@@ -1,4 +1,5 @@
-<form action="create_activity" method="post">
+<div><h1><%= @child %></h1></div>
+<form action="/create_activity" method="post">
   <div class="form_row">
     <label class="activity_labels">Type: </label>
     <select name="type">
@@ -30,8 +31,10 @@
         <option value="<%= plan.name%>"><%= plan.name%></option>
       <% end %>
     </select></div>
+  <% if @user %>
   <div class="form_row">
     <label class="activity_labels">Hidden Activity: </label>
     <input type="checkbox" name="hidden_activity" value="hidden"></div>
-  <button type="submit">Create</button>
+  <% end %>
+  <button type="submit" <% if @parent %> name="child" value="<%= @child %>" <% end %>> Create</button>
 </form>

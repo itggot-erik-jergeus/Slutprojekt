@@ -87,39 +87,50 @@ class App < Sinatra::Base
     erb :activity
   end
 
-  get '/new_activity' do
+  get '/new_activity/?' do
     if session[:user_id]
       @user = User.get(session[:user_id])
       @subjects = Subject.all(user_id: session[:user_id])
       @plans = Plan.all(user_id: session[:user_id])
-    # elsif session[:parent]
-      # @parent = session[:parent]
-      # @subjects = Subject.all(parent_id: session[:parent].id)
-      # @plans = Plan.all(parent_id: session[:parent].id)
     else
-      ArgumentError
+      redirect '/'
+    end
+    erb :new_activity
+  end
+
+  get '/new_activity/:id/?' do |child_id|
+    if session[:parent_id]
+      @parent = Parent.get(session[:parent_id])
+      @subjects = Subject.all(user_id: child_id)
+      @plans = Plan.all(user_id: child_id)
+      @child = User.first(id: child_id).username
+    else
+      redirect '/'
     end
     erb :new_activity
   end
 
   post '/create_activity' do
-    if params[:hidden_activity] == "hidden"
-      hidden = true
-    else
-      hidden = false
-    end
     if session[:user_id]
       parent = false
+      if params[:hidden_activity] == "hidden"
+        hidden = true
+      else
+        hidden = false
+      end
       Activity.create(title: params[:title], type: params[:type], subject: params[:subject],
                       date: params[:due_date], planning: params[:planning],
                       hidden: hidden, parent: parent, user_id: session[:user_id])
+      redirect '/activities/simple'
     else
       parent = true
-      # Activity.create(title: params[:title], type: params[:type], subject: params[:subject],
-      #                 date: params[:due_date], planning: params[:planning],
-      #                 hidden: hidden, parent: parent, user_id: session[:parent_id] )
+      user = User.first(username: params[:child]).id
+      Activity.create(title: params[:title], type: params[:type], subject: params[:subject],
+                      date: params[:due_date], planning: params[:planning],
+                      hidden: false, parent: parent, user_id: user )
+
     end
-    redirect '/activities/simple'
+    redirect '/'
   end
 
   get '/management' do
@@ -130,16 +141,16 @@ class App < Sinatra::Base
       requests = ParentRequest.all(user_id: session[:user_id])
       @requesters = []
       for request in requests
-        @requesters << Parent.get(request.id)
+        @requesters << Parent.get(request.requester_id)
       end
     elsif session[:parent_id]
       @parent = Parent.get(session[:parent_id])
       @search = User.get(session[:search])
       @relative = @parent.users
-      requests = UserRequest.all(:parent_id => session[:parent_id])
+      requests = UserRequest.all(parent_id: session[:parent_id])
       @requesters = []
       for request in requests
-        @requesters << User.get(request.id)
+        @requesters << User.get(request.requester_id)
       end
       p "hej"
       p @requesters
@@ -164,14 +175,16 @@ class App < Sinatra::Base
   end
 
   post '/user_request/?' do
-    UserRequest.create(time: Time.now, requester_id: session[:user_id], parent_id: session[:search])
-
+    user = User.get(session[:user_id])
+    parent = Parent.get(session[:search])
+    unless user.parents.include? parent then UserRequest.create(time: Time.now, requester_id: session[:user_id], parent_id: session[:search]) end
     redirect back
   end
 
   post '/parent_request/?' do
-    ParentRequest.create(time: Time.now, requester_id: session[:parent_id], user_id: session[:search])
-
+    parent = Parent.get(session[:parent_id])
+    user = User.get(session[:search])
+    unless parent.users.include? user then ParentRequest.create(time: Time.now, requester_id: session[:parent_id], user_id: session[:search]) end
     redirect back
   end
 

@@ -10,7 +10,12 @@
     <div id="tabobjects">
       <ul>
         <li><a href="/activities/simple">Upcoming Events</a></li>
-        <li><a href="/new_activity">Add New Activity</a></li>
+        <li><% if @user %><a href="/new_activity"><% end %>Add New Activity</a></li>
+        <% if @parent %>
+          <% for child in @parent.users %>
+            <li class="hidden"><a href="/new_activity/<%= child.id %>"><%= child.username %></a></li>
+          <% end %>
+        <% end %>
         <li><a href="/management">Manage <%= if @user then "Parents" else "Children" end%></a></li>
         <li><a href="/profile">My Profile</a></li>
         <li><form action="/log_out" method="post"><button type="submit">Log Out</button></form></li>

@@ -2,6 +2,9 @@ body {
     background-color: black;
     color: #d1d1d1;
 }
+.hidden {
+
+}
 .tab {
     margin-left: auto;
     margin-right: auto;
