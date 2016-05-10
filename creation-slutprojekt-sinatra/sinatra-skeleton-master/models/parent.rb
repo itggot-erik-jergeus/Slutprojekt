@@ -9,5 +9,5 @@ class Parent
 
   has n, :relations
   has n, :user_requests
-  has n, :users, through: :relations
+  has n, :users, :through => Resource
 end

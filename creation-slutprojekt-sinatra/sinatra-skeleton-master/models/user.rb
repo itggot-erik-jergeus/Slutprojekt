@@ -17,5 +17,5 @@ class User
   has n, :activities
   has n, :plans
   has n, :parent_requests
-  has n, :parents, through: :relations
+  has n, :parents, :through => Resource
 end
