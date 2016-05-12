@@ -1,0 +1,67 @@
+<div><h1>Manage Subjects</h1>
+  <form action="/new_subject" method="post">
+    <label class="subject_labels">Subject Name:</label><input type="text" name="subject">
+    <% if @parent %>
+    <label class="subject_labels">Child: </label>
+    <select name="child">
+      <% for child in @children %>
+          <option value="<%= child.username%>"><%= child.username%></option>
+      <% end %>
+    </select>
+    <% end %>
+    <input type="submit" value="Create Subject">
+  </form>
+  <% if @user %>
+    <form action="/delete_subject" method="post">
+    <select name="subject">
+      <% for subject in @subjects %>
+          <option value="<%= subject.name%>"><%= subject.name%></option>
+      <% end %>
+    </select>
+    <input type="submit" value="Remove">
+  </form>
+  <% end %>
+</div>
+<div><h1>Manage Planning Schedules</h1>
+  <form action="/new_plan" method="post">
+    <div class="form_row"><label class="plan_labels">Title: </label><input type="text" name="title"></div>
+    <div class="requirements">*</div>
+    <div class="form_row"><label class="plan_labels">Interval Length: </label><input type="number" min="0" name="length"></div>
+    <div class="requirements">* (Minutes)</div>
+    <div class="form_row"><label class="plan_labels">Preferred Interval Amount: </label><input type="number" min="0" name="amount"></div>
+    <div class="form_row"><label class="plan_labels">Weekends: </label>
+    <div class="requirements">*</div>
+      <input type="radio" name="weekend" value="2"> Preferred<br>
+      <input type="radio" name="weekend" value="1"> Allowed<br>
+      <input type="radio" name="weekend" value="0"> None</div>
+    <% if @parent %>
+        <label class="plan_labels">Child: </label>
+        <select name="child">
+          <% for child in @children %>
+              <option value="<%= child.username%>"><%= child.username%></option>
+          <% end %>
+        </select>
+    <% end %>
+      <input type="submit" value="Create Plan">
+  </form>
+  <% if @user %>
+  <form action="/delete_plan" method="post">
+    <select name="plan">
+      <option value="nil" selected>None</option>
+      <% for plan in @plans %>
+          <option value="<%= plan.name%>"><%= plan.name%></option>
+      <% end %>
+    </select>
+    <input type="submit" value="Remove">
+  </form>
+  <% end %>
+</div>
+<div><h1>My profile</h1>
+  <p><% if @user %><%= @user.username%>
+     <% elsif @parent%><%= @parent.username %><% end %></p>
+  <form action="/update_details" method="post">
+    <textarea name="details"><% if @user %><%= @user.details%>
+      <% elsif @parent%><%= @parent.details %><% end %></textarea>
+    <input type="submit" value="Update">
+  </form>
+</div>

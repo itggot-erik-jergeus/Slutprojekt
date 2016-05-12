@@ -87,6 +87,7 @@ class App < Sinatra::Base
     erb :activity
   end
 
+  # For User
   get '/new_activity/?' do
     if session[:user_id]
       @user = User.get(session[:user_id])
@@ -98,6 +99,7 @@ class App < Sinatra::Base
     erb :new_activity
   end
 
+  # For Parent
   get '/new_activity/:id/?' do |child_id|
     if session[:parent_id]
       @parent = Parent.get(session[:parent_id])
@@ -189,7 +191,7 @@ class App < Sinatra::Base
   end
 
   post '/remove_relative/:id/?' do |relative_id|
-    if session[:user] != nil
+    if session[:user_id] != nil
       relation = ParentUser.get(relative_id, session[:user_id])
     else
       relation = ParentUser.get(session[:parent_id], relative_id)
@@ -220,6 +222,78 @@ class App < Sinatra::Base
       request = ParentRequest.first(:requester_id => request_id)
       request.destroy
     end
+    redirect back
+  end
+
+  get '/profile' do
+    if session[:user_id]
+      @user = User.get(session[:user_id])
+      @subjects = Subject.all(user_id: session[:user_id])
+      @plans = Plan.all(user_id: session[:user_id])
+    elsif session[:parent_id]
+      @parent = Parent.get(session[:parent_id])
+      @children = @parent.users
+      @subjects = []
+      @plans = []
+      for child in @children
+        @subjects << Subject.all(user_id: child.id)
+        @plans << Plan.all(user_id: child.id)
+      end
+    else
+      redirect '/'
+    end
+    erb :profile
+  end
+
+  post '/new_subject' do
+    if session[:user_id]
+      user = session[:user_id]
+    elsif session[:parent_id]
+      user = User.first(username: params[:child])
+    else
+      redirect '/'
+    end
+    Subject.create(name: params[:subject], user_id: user)
+    redirect back
+  end
+
+  post '/delete_subject' do
+    if session[:user_id]
+      subject = Subject.first(user_id: session[:user_id], name: params[:subject])
+      subject.destroy
+    end
+    redirect back
+  end
+
+  post '/new_plan' do
+    if session[:user_id]
+      user = session[:user_id]
+    elsif session[:parent_id]
+      user = User.first(username: params[:child])
+    else
+      redirect '/'
+    end
+    Plan.create(name: params[:title], length: params[:length].to_i, amount: params[:amount].to_i, weekend: params[:weekend].to_i, user_id: user)
+    redirect back
+  end
+
+  post '/delete_plan' do
+    if session[:user_id]
+      plan = Plan.first(user_id: session[:user_id], name: params[:name])
+      plan.destroy
+    end
+    redirect back
+  end
+
+  post '/update_details' do
+    if session[:parent_id]
+      person = Parent.get(session[:parent_id])
+    elsif session[:user_id]
+      person = User.get(session[:user_id])
+    else
+      redirect '/'
+    end
+    person.update(:details => params[:details])
     redirect back
   end
 end
