@@ -69,6 +69,20 @@ class App < Sinatra::Base
       @activity = Activity.all(user_id: session[:user_id])
     elsif session[:parent_id]
       @parent = Parent.get(session[:parent_id])
+      @activity = []
+      sort = []
+      for child in @parent.users
+        for activity in Activity.all(user_id: child.id)
+          sort << {:date => activity.date, :id => activity.id}
+        end
+      end
+      sort.sort_by! do |item|
+        item[:date]
+      end
+      for item in sort
+        @activity << Activity.get(item[:id])
+      end
+      p @activity
     end
     @event = true
     @simple = true

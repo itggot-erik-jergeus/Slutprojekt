@@ -7,20 +7,31 @@
 </head>
 <body>
   <% if @user || @parent %>
-    <div id="tabobjects">
-      <ul>
-        <li><a href="/activities/simple">Upcoming Events</a></li>
-        <li><% if @user %><a href="/new_activity"><% end %>Add New Activity</a></li>
-        <% if @parent %>
-          <% for child in @parent.users %>
-            <li class="hidden"><a href="/new_activity/<%= child.id %>"><%= child.username %></a></li>
-          <% end %>
+    <nav class="tabobjects">
+      <ul class="navlist">
+        <li class="objects"><a href="/activities/simple"><button class="btn-white">Upcoming Events</button></a></li>
+        <% if @user %><li class="objects"><a href="/new_activity"><button class="btn-white">Add New Activity</button></a></li>
+        <% elsif @parent %>
+          <li class="objects">
+            <div class="dropdown-objects">>
+            <button class="btn-drop">Add New Activities</button>
+            <div class="dropdown-content">
+              <% if @parent.users != []%>
+                <% for child in @parent.users %>
+                  <a href="/new_activity/<%= child.id %>"><%= child.username %></a>
+                <% end %>
+              <% else %>
+                <a href="/management">No Children</a>
+              <% end %>
+            </div>
+            </div
+          </li>
         <% end %>
-        <li><a href="/management">Manage <%= if @user then "Parents" else "Children" end%></a></li>
-        <li><a href="/profile">My Profile</a></li>
-        <li><form action="/log_out" method="post"><button type="submit">Log Out</button></form></li>
+        <li class="objects"><a href="/management"><button class="btn-white">Manage <%= if @user then "Parents" else "Children" end%></button></button></a></li>
+        <li class="objects"><a href="/profile"><button class="btn-white">My Profile</button></a></li>
+        <li class="objects"><form action="/log_out" method="post"><button type="submit" class="btn-gray">Log Out</button></form></li>
       </ul>
-    </div>
+    </nav>
     <% if @event %>
       <form action="/activities/simple" method="get">
         <div class="event_form"><input type="submit" value="Simple Form"></div>
@@ -31,18 +42,12 @@
       <div class="event_date"><%= Time.now %></div>
     <% end%>
   <% else %>
-    <div>
-      <table class="tab">
-        <tr>
-          <td class="user_btn"><form action="/login" method="get"><button class="btn-neutral" type="submit">Log In</button></form></td>
-          <!--<td class="parent_btn"><form action="/parent_login" method="get"><button class="btn-neutral" type="submit">Parent Log In</button></form></td>-->
-        </tr>
-        <tr>
-          <td class="user_btn"><form action="/sign_up" method="get"><button class="btn-green" type="submit">Sign Up</button></form></td>
-          <!--<td class="parent_btn"><form action="/parent_sign_up" method="get"><button class="btn-green" type="submit">Parent Sign Up</button></form></td>-->
-        </tr>
-      </table>
-    </div>
+    <nav class="tabobjects">
+      <div class="tab">
+        <form action="/login" method="get" class="user_btn"><button class="btn-green" type="submit">Log In</button></form>
+        <form action="/sign_up" method="get" class="user_btn"><button class="btn-green" type="submit">Sign Up</button></form>
+      </div>
+    </nav>
   <% end %>
 <%= yield %>
 </body>
