@@ -66,7 +66,11 @@ class App < Sinatra::Base
   get '/activities/simple' do
     if session[:user_id]
       @user = User.get(session[:user_id])
-      @activity = Activity.all(user_id: session[:user_id])
+      @activity = []
+      sort = []
+      for activity in Activity.all(user_id: session[:user_id])
+        sort << {:date => activity.date, :id => activity.id}
+      end
     elsif session[:parent_id]
       @parent = Parent.get(session[:parent_id])
       @activity = []
@@ -76,13 +80,14 @@ class App < Sinatra::Base
           sort << {:date => activity.date, :id => activity.id}
         end
       end
-      sort.sort_by! do |item|
-        item[:date]
-      end
-      for item in sort
-        @activity << Activity.get(item[:id])
-      end
-      p @activity
+    else
+      redirect '/'
+    end
+    sort.sort_by! do |item|
+      item[:date]
+    end
+    for item in sort
+      @activity << Activity.get(item[:id])
     end
     @event = true
     @simple = true
@@ -134,15 +139,16 @@ class App < Sinatra::Base
       else
         hidden = false
       end
+
       Activity.create(title: params[:title], type: params[:type], subject: params[:subject],
-                      date: params[:due_date], planning: params[:planning],
+                      date: "#{params[:due_date]} #{params[:time]}", planning: params[:planning],
                       hidden: hidden, parent: parent, user_id: session[:user_id])
       redirect '/activities/simple'
     else
       parent = true
       user = User.first(username: params[:child]).id
       Activity.create(title: params[:title], type: params[:type], subject: params[:subject],
-                      date: params[:due_date], planning: params[:planning],
+                      date: "#{params[:due_date]} #{params[:time]}", planning: params[:planning],
                       hidden: false, parent: parent, user_id: user )
 
     end

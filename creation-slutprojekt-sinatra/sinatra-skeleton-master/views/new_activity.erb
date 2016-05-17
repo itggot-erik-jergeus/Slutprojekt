@@ -1,40 +1,46 @@
-<div><h1><%= @child %></h1></div>
-<form action="/create_activity" method="post">
-  <div class="form_row">
-    <label class="activity_labels">Type: </label>
-    <select name="type">
-      <option value="Homework" selected>Homework</option>
-      <option value="Event">Other</option>
-    </select></div>
-  <div class="requirements">*</div>
-  <div class="form_row">
-    <label class="activity_labels">Title: </label>
-    <input type="text" name="title"></div>
-  <div class="requirements">*</div>
-  <div class="form_row">
-    <label class="activity_labels">Subject: </label>
-    <select name="subject">
-      <option value="nil" selected>None</option>
-      <% for subject in @subjects %>
-          <option value="<%= subject.name%>"><%= subject.name%></option>
-      <% end %>
-    </select></div>
-  <div class="form_row">
-    <label class="activity_labels">Due Date: </label>
-    <input type="date" name="due_date" placeholder="yyyy-mm-dd"></div>
-  <div class="requirements">*</div>
-  <div class="form_row">
-    <label class="activity_labels">Planning: </label>
-    <select name="planning">
-      <option value="nil" selected>None</option>
-      <% for plan in @plans %>
-        <option value="<%= plan.name%>"><%= plan.name%></option>
-      <% end %>
-    </select></div>
-  <% if @user %>
-  <div class="form_row">
-    <label class="activity_labels">Hidden Activity: </label>
-    <input type="checkbox" name="hidden_activity" value="hidden"></div>
-  <% end %>
-  <button type="submit" <% if @parent %> name="child" value="<%= @child %>" <% end %>> Create</button>
-</form>
+<div class="activity_form">
+  <h1 style="text-align:center;" class="headline"><%= @child %></h1>
+  <form action="/create_activity" method="post">
+    <div class="form_row">
+      <label class="activity_labels">Type: </label>
+      <select name="type">
+        <option value="Homework" selected>Homework</option>
+        <option value="Event">Other</option>
+      </select></div>
+    <p class="form_row_required">
+      <label class="activity_labels">Title: </label>
+      <input type="text" name="title"></p>
+    <p class="form_row">
+      <label class="activity_labels">Subject: </label>
+      <select name="subject">
+        <option value="nil" selected>None</option>
+        <% for subject in @subjects %>
+            <option value="<%= subject.name%>"><%= subject.name%></option>
+        <% end %>
+      </select></p>
+    <p class="form_row_required">
+      <label class="activity_labels">Due Date: </label>
+      <input type="date" name="due_date" placeholder="yyyy-mm-dd">
+    </p>
+    <p class="form_row_required">
+      <label class="activity_labels">Time: </label>
+      <input type="time" name="time" placeholder="hh:mm">
+    </p>
+    <p class="form_row">
+      <label class="activity_labels">Planning: </label>
+      <select name="planning">
+        <option value="nil" selected>None</option>
+        <% for plan in @plans %>
+          <option value="<%= plan.name%>"><%= plan.name%></option>
+         <% end %>
+      </select></p>
+    <% if @user %>
+    <p class="form_row">
+      <label class="activity_labels">Hidden Activity: </label>
+      <input type="checkbox" name="hidden_activity" value="hidden"></p>
+    <% end %>
+    <p class="form_row">
+      <button class="submit" style="margin-left: 10px;" type="submit" <% if @parent %> name="child" value="<%= @child %>" <% end %>> Create Activity</button>
+    </p>
+  </form>
+</div>

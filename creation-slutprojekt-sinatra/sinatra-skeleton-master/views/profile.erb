@@ -1,4 +1,4 @@
-<div><h1>Manage Subjects</h1>
+<div><h1 class="headline">Manage Subjects</h1>
   <form action="/new_subject" method="post">
     <label class="subject_labels">Subject Name:</label><input type="text" name="subject">
     <% if @parent %>
@@ -22,7 +22,7 @@
   </form>
   <% end %>
 </div>
-<div><h1>Manage Planning Schedules</h1>
+<div><h1 class="headline">Manage Planning Schedules</h1>
   <form action="/new_plan" method="post">
     <div class="form_row"><label class="plan_labels">Title: </label><input type="text" name="title"></div>
     <div class="requirements">*</div>
@@ -56,7 +56,7 @@
   </form>
   <% end %>
 </div>
-<div><h1>My profile</h1>
+<div><h1 class="headline">My profile</h1>
   <p><% if @user %><%= @user.username%>
      <% elsif @parent%><%= @parent.username %><% end %></p>
   <form action="/update_details" method="post">
