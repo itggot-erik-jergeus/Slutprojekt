@@ -12,9 +12,6 @@ body {
     border-bottom: 3px solid #545454;
 }
 
-.hidden {
-
-}
 .tab {
     display: flex;
     width: 100%;
@@ -25,18 +22,20 @@ body {
 
 .user_btn {
     float: left;
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
-/*.btn-neutral {*/
-    /*font-size: inherit;*/
-    /*font-weight: 600;*/
-    /*line-height: 1.5;*/
-    /*width: 8em;*/
-    /*color: #d1d1d1;*/
-    /*text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);*/
-    /*background-color: #686b43;*/
-    /*border-color: #949763;*/
-/*}*/
+.btn-black {
+    font-size: inherit;
+    font-weight: 600;
+    line-height: 1.5;
+    width: 8em;
+    color: #d1d1d1;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
+    background-color: #282828;
+    border-color: #949763;
+}
 
 .btn-green {
     font-size: inherit;
@@ -140,7 +139,7 @@ body {
     display: block;
 }
 
-.activity_form {
+.form_box, .activity_simple {
     margin-top: 2em;
     margin-left: auto;
     margin-right: auto;
@@ -152,10 +151,17 @@ body {
 
 .headline {
     margin-left: 20px;
+    border-bottom: 2px solid;
+}
+
+.subline {
+    margin-left: 20px;
+    border-bottom: 1px solid;
+    width: 50%;
 }
 
 .form_row, .form_row_required {
-    margin-left: 15px;
+    margin-left: 50px;
     height: 2.5em;
     font-size: large;
 }
@@ -164,13 +170,92 @@ body {
     content:" *";
 }
 
-.requirements {
-    font-size: small;
-    margin-left: 5px;
-    color: #9d2c00;
-}
-
-.login {
+#manage_profile, #manage_parents {
+    width: 80%;
+    height: 55em;
+    margin-top: 2em;
     margin-left: auto;
     margin-right: auto;
+    background-color: #eeeeee;
+    border: solid 2px #0e0e0e;
+}
+
+#manage_parents {
+    height: 45em;
+}
+
+.manage_stuff_1, .manage_stuff_2, .manage_stuff_3{
+    margin-left: 3em;
+    width: 40%;
+    height: 30%;
+    float: left;
+}
+
+.manage_stuff_1 {
+    height: 264px;
+}
+
+.manage_stuff_2 {
+    margin-left: 10em;
+    height: 264px;
+}
+
+.event_form {
+    display: flex;
+    justify-content: center;
+}
+
+.event_date {
+    font-size: xx-large;
+    font-weight: 600;
+    border-bottom: solid;
+    margin-left: auto;
+    margin-right: auto;
+    width: 10em;
+    text-align: center;
+}
+
+.activity_homework, .activity_other {
+    border-bottom: 2px solid #545454;
+    background-color: lightblue;
+}
+
+.activity_homework {
+    background-color: lightcyan;
+}
+
+.date {
+    font-size: x-large;
+    text-align: center;
+}
+
+.title {
+    margin-left: 1em;
+    font-size: large;
+    font-weight: 600;
+}
+
+.subject {
+    margin-left: 1em;
+}
+
+.select_label {
+    float: left;
+    padding: 0 1em;
+    text-align: center;
+}
+
+.cross {
+    margin-top: -20px;
+    background: none;
+    width: 30px;
+    height: 30px;
+    border: none;
+    float: right;
+}
+
+.cross_img {
+    display:flex;
+    justify-content: center;
+    width:20px;
 }

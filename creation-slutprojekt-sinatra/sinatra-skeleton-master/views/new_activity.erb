@@ -1,17 +1,17 @@
-<div class="activity_form">
-  <h1 style="text-align:center;" class="headline"><%= @child %></h1>
-  <form action="/create_activity" method="post">
+<div class="form_box">
+  <% if @parent %> <h1 style="text-align:center;" class="headline"><%= @child %></h1> <% end %>
+  <form style="margin-top:2em;margin-bottom:2em;" action="/create_activity" method="post">
     <div class="form_row">
-      <label class="activity_labels">Type: </label>
+      <label class="activity_labels">Type: </label><br>
       <select name="type">
         <option value="Homework" selected>Homework</option>
         <option value="Event">Other</option>
       </select></div>
     <p class="form_row_required">
-      <label class="activity_labels">Title: </label>
+      <label class="activity_labels">Title: </label><br>
       <input type="text" name="title"></p>
     <p class="form_row">
-      <label class="activity_labels">Subject: </label>
+      <label class="activity_labels">Subject: </label><br>
       <select name="subject">
         <option value="nil" selected>None</option>
         <% for subject in @subjects %>
@@ -19,15 +19,15 @@
         <% end %>
       </select></p>
     <p class="form_row_required">
-      <label class="activity_labels">Due Date: </label>
+      <label class="activity_labels">Due Date: </label><br>
       <input type="date" name="due_date" placeholder="yyyy-mm-dd">
     </p>
     <p class="form_row_required">
-      <label class="activity_labels">Time: </label>
+      <label class="activity_labels">Time: </label><br>
       <input type="time" name="time" placeholder="hh:mm">
     </p>
     <p class="form_row">
-      <label class="activity_labels">Planning: </label>
+      <label class="activity_labels">Planning: </label><br>
       <select name="planning">
         <option value="nil" selected>None</option>
         <% for plan in @plans %>
@@ -40,7 +40,7 @@
       <input type="checkbox" name="hidden_activity" value="hidden"></p>
     <% end %>
     <p class="form_row">
-      <button class="submit" style="margin-left: 10px;" type="submit" <% if @parent %> name="child" value="<%= @child %>" <% end %>> Create Activity</button>
+      <button class="btn-black" type="submit" <% if @parent %> name="child" value="<%= @child %>" <% end %>> Create Activity</button>
     </p>
   </form>
 </div>

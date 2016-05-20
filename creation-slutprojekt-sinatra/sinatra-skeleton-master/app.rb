@@ -147,12 +147,18 @@ class App < Sinatra::Base
     else
       parent = true
       user = User.first(username: params[:child]).id
+      date = DateTime.strptime("#{params[:due_date]}T#{params[:time]}", '%Y-%m-%dT%H:%M')
       Activity.create(title: params[:title], type: params[:type], subject: params[:subject],
-                      date: "#{params[:due_date]} #{params[:time]}", planning: params[:planning],
+                      date: date, planning: params[:planning],
                       hidden: false, parent: parent, user_id: user )
 
     end
     redirect '/'
+  end
+
+  post '/activity/delete/?' do
+    Activity.get(params[:id].to_i).destroy
+    redirect back
   end
 
   get '/management' do

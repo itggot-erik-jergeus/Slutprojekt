@@ -34,13 +34,15 @@
       </ul>
     </nav>
     <% if @event %>
-      <form action="/activities/simple" method="get">
-        <div class="event_form"><input type="submit" value="Simple Form"></div>
-      </form>
-      <form action="/activities/calendar" method="get">
-        <div class="event_form"><input type="submit" value="Calendar Form"></div>
-      </form>
-      <div class="event_date"><%= Time.now %></div>
+      <div class="event_form">
+        <form action="/activities/simple" method="get">
+          <input class="btn-black" type="submit" value="Simple Form">
+        </form>
+        <form action="/activities/calendar" method="get">
+          <input class="btn-black" type="submit" value="Calendar Form">
+        </form>
+      </div>
+      <div class="event_date"><%= Time.now.strftime('%a %d %b - %H:%M') %></div>
     <% end%>
   <% else %>
     <nav class="tabobjects">

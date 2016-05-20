@@ -1,4 +1,14 @@
-<% for activity in @activity %>
-  <h1 class="date"><%= activity.date %></h1>
-  <h1 class="title"><%= activity.title %></h1>
-<% end %>
+<div class="activity_simple">
+  <% for activity in @activity %>
+    <% unless @parent && activity.hidden == true %>
+      <div class="activity_<%= if activity.type == "Homework" then "homework" else "other" end %>"</div>
+        <div class="date"><%= activity.date.strftime('%a %d %b - %H:%M') %></div>
+        <div class="title"><%= activity.title %></div>
+          <form action="/activity/delete/" method="post">
+            <button class="cross" type="submit" name="id" value="<%= activity.id %>"><img class="cross_img" src="/img/cross.svg"></button>
+          </form>
+        <div class="subject"><%= activity.subject %></div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

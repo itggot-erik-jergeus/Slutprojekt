@@ -1,34 +1,42 @@
-<h1>Add <%= if @user then "Parent" else "Child" end%></h1>
-<form action="/<%= if @user then "parent" else "child" end%>_validation" method="post">
-  <div class="management_form">
-    <label class="management_labels">Username: </label>
-    <input type="text" name="name" placeholder="Username">
-    <button type="submit">Find</button></div>
-</form>
-<% if @search != nil %>
-  <h3><%= @search.username %></h3>
-  <p><%= @search.details %></p>
-  <form action="/<%= if @user then "user" else "parent" end%>_request/" method="post">
-    <div class="management_form">
-      <input type="submit" name="request" value="Request Supervision"></div>
-  </form>
-<% end %>
-<h1>Current <%= if @user then "Parents" else "Children" end%></h1>
-<% for person in @relative%>
-  <%= person.username %>
-  <form action="/remove_relative/<%= person.id %>/" method="post">
-    <input type="submit" value="Remove <%= if @user then "parent" else "user" end%>">
-  </form>
-<% end %>
-<h1>Requests</h1>
-<% if @requesters != [] %>
-  <% for request in @requesters%>
-      <h3><%= request.username %></h3>
-      <p><%= request.details %></p>
-      <form action="/confirmation/<%= request.id %>/" method="post">
+<div id="manage_parents">
+  <div class="manage_stuff_1">
+    <h1 class="headline">Add <%= if @user then "Parent" else "Child" end%></h1>
+    <form action="/<%= if @user then "parent" else "child" end%>_validation" method="post">
+      <div class="management_form">
+        <p class="form_row"><label class="management_labels">Username: </label>
+        <input type="text" name="name" placeholder="Username">
+        <button type="submit">Find</button></div></p>
+    </form>
+    <% if @search != nil %>
+      <h3><%= @search.username %></h3>
+      <p><%= @search.details %></p>
+      <form action="/<%= if @user then "user" else "parent" end%>_request/" method="post">
         <div class="management_form">
-          <input type="submit" name="option" value="Accept">
-          <input type="submit" name="option" value="Decline"></div>
+          <input type="submit" name="request" value="Request Supervision"></div>
       </form>
-  <% end %>
-<% end %>
+    <% end %>
+  </div>
+  <div class="manage_stuff_2">
+    <h1 class="headline">Requests</h1>
+    <% if @requesters != [] %>
+        <% for request in @requesters%>
+            <h3><%= request.username %></h3>
+            <p><%= request.details %></p>
+            <form action="/confirmation/<%= request.id %>/" method="post">
+              <div class="management_form">
+                <input type="submit" name="option" value="Accept">
+                <input type="submit" name="option" value="Decline"></div>
+            </form>
+        <% end %>
+    <% end %>
+  </div>
+  <div class="manage_stuff_3">
+    <h1 class="headline">Current <%= if @user then "Parents" else "Children" end%></h1>
+    <% for person in @relative%>
+      <%= person.username %>
+      <form action="/remove_relative/<%= person.id %>/" method="post">
+        <input type="submit" value="Remove <%= if @user then "parent" else "user" end%>">
+      </form>
+    <% end %>
+  </div>
+</div>

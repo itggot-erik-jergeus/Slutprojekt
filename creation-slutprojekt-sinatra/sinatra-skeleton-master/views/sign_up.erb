@@ -1,13 +1,10 @@
-<div class="sign_up">
+<div class="form_box">
   <form action="/sign_up/create" method="post" id="sign_up_form">
-    <div class="form_row"><label class="sign_up_labels">Username: </label><input type="text" name="username"></div>
-    <div class="requirements">* (a-z, A-Z, 0-9, _)</div>
-    <div class="form_row"><label class="sign_up_labels">Password: </label><input type="password" name="password"></div>
-    <div class="requirements">* (a-z, A-Z, 0-9, Special Characters)</div>
-    <div class="form_row"><label class="sign_up_labels">Email: </label><input type="text" name="email"></div>
-    <div class="requirements">*</div>
-    <div class="form_row"><label class="sign_up_labels">Details: </label><textarea name="details"></textarea></div>
-    <div class="form_row"><label class="sign_up_labels">Parent Account: </label><input type="checkbox" name="parent_account" value="parent"></div>
-    <button type="submit">Sign Up</button>
+    <p class="form_row_required"><label class="sign_up_labels">Username: </label><br><input type="text" name="username"></p>
+    <p class="form_row_required"><label class="sign_up_labels">Password: </label><br><input type="password" name="password"></p>
+    <p class="form_row_required"><label class="sign_up_labels">Email: </label><br><input type="text" name="email"></p>
+    <p class="form_row"><label class="sign_up_labels">Details: </label><br><textarea rows="2" cols="20" name="details"></textarea></p>
+    <p class="form_row"><br><label class="sign_up_labels">Parent Account: </label><input type="checkbox" name="parent_account" value="parent"></p>
+    <p class="form_row"><button class="btn-black" type="submit">Sign Up</button></p>
   </form>
 </div>
