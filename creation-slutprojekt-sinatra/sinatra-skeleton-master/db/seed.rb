@@ -8,7 +8,7 @@ class Seeder
   end
 
   def self.users
-    User.create(username: 'Erik', password: '123ABC', email_address: 'erik.mail@itggot.se', details: 'dlas')
+    User.create(username: 'Erik', password: '123ABC', email_address: 'erik.mail@itggot.se', details: 'dlas', bed_time: Time.new(0000,01,01,20,00))
   end
 
   def self.parents
@@ -16,14 +16,13 @@ class Seeder
   end
 
   def self.plans
-    Plan.create(name: 'Standard', length: 4800, amount: 4, weekend: 1, user_id: 1)
-    Plan.create(name: 'Grabb', length: 3600, amount: 3, weekend: 1, user_id: 1)
+    Plan.create(name: 'Standard', length: 90, amount: 4, weekend: 1, user_id: 1)
+    Plan.create(name: 'Grabb', length: 60, amount: 3, weekend: 1, user_id: 1)
   end
 
   def self.subjects
     Subject.create(name: 'Engelska', user_id: 1)
     Subject.create(name: 'NO', user_id: 1)
-
   end
 
 end

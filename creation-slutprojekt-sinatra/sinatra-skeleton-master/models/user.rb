@@ -6,12 +6,8 @@ class User
   property :password, BCryptHash, required: true
   property :email_address, String, required: true, unique: true
   property :details, Text
-  property :planning, String
+  property :bed_time, Time
 
-  # def self.request(app:, user:, parent_search:)
-  #
-  #
-  # end
 
   has n, :relations
   has n, :activities

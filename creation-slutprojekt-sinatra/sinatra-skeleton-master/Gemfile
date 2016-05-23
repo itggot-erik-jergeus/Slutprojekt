@@ -19,6 +19,7 @@ group :development do
   gem 'dm-sqlite-adapter', group: :development
   gem 'rerun'
   gem 'thin'
+  gem 'pry'
   
 end
 

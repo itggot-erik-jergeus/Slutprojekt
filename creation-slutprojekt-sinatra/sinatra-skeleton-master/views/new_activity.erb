@@ -23,17 +23,22 @@
       <input type="date" name="due_date" placeholder="yyyy-mm-dd">
     </p>
     <p class="form_row_required">
-      <label class="activity_labels">Time: </label><br>
+      <label class="activity_labels">Due Time: </label><br>
       <input type="time" name="time" placeholder="hh:mm">
     </p>
     <p class="form_row">
-      <label class="activity_labels">Planning: </label><br>
+      <label for="planning" class="activity_labels">Planning: </label><br>
       <select name="planning">
         <option value="nil" selected>None</option>
         <% for plan in @plans %>
           <option value="<%= plan.name%>"><%= plan.name%></option>
          <% end %>
-      </select></p>
+      </select>
+    </p>
+    <p class="form_row">
+      <label class="activity_labels">Length of Activity: </label><br>
+      <input type="text" name="length" placeholder="Minutes">
+    </p>
     <% if @user %>
     <p class="form_row">
       <label class="activity_labels">Hidden Activity: </label>

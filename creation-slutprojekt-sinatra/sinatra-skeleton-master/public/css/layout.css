@@ -215,13 +215,17 @@ body {
     text-align: center;
 }
 
-.activity_homework, .activity_other {
+.activity_homework, .activity_training, .activity_other {
     border-bottom: 2px solid #545454;
     background-color: lightblue;
 }
 
 .activity_homework {
     background-color: lightcyan;
+}
+
+.activity_training {
+    background-color: lightgreen;
 }
 
 .date {

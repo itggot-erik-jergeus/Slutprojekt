@@ -1,3 +1,4 @@
+require 'pry'
 class App < Sinatra::Base
   enable :sessions
 
@@ -50,9 +51,12 @@ class App < Sinatra::Base
 
   post '/sign_up/create' do
     if params[:parent_account]
-      Parent.create(username: params[:username], password: params[:password], email_address: params[:email], details: params[:details])
+      Parent.create(username: params[:username], password: params[:password],
+                    email_address: params[:email], details: params[:details])
     else
-      User.create(username: params[:username], password: params[:password], email_address: params[:email], details: params[:details])
+      User.create(username: params[:username], password: params[:password],
+                  email_address: params[:email], details: params[:details],
+                  bed_time: Time.new(0000,01,01,20,00))
     end
   redirect '/'
 
@@ -140,18 +144,19 @@ class App < Sinatra::Base
         hidden = false
       end
 
-      Activity.create(title: params[:title], type: params[:type], subject: params[:subject],
+      activity = Activity.create(title: params[:title], type: params[:type], subject: params[:subject],
                       date: "#{params[:due_date]} #{params[:time]}", planning: params[:planning],
-                      hidden: hidden, parent: parent, user_id: session[:user_id])
+                      time: params[:length].to_i, hidden: hidden, parent: parent, user_id: session[:user_id])
+      activity.plan(plan_length: Plan.first(name: params[:planning], user_id: session[:user_id]).length)
       redirect '/activities/simple'
     else
       parent = true
       user = User.first(username: params[:child]).id
       date = DateTime.strptime("#{params[:due_date]}T#{params[:time]}", '%Y-%m-%dT%H:%M')
-      Activity.create(title: params[:title], type: params[:type], subject: params[:subject],
-                      date: date, planning: params[:planning],
+      activity = Activity.create(title: params[:title], type: params[:type], subject: params[:subject],
+                      time: params[:length].to_i, date: date, planning: params[:planning],
                       hidden: false, parent: parent, user_id: user )
-
+      activity.plan(plan_length: Plan.first(name: params[:planning], user_id: user).length)
     end
     redirect '/'
   end
@@ -321,5 +326,13 @@ class App < Sinatra::Base
     end
     person.update(:details => params[:details])
     redirect back
+  end
+
+  post '/update_bed_time' do
+    if session[:user_id]
+      User.get(session[:user_id]).update(:bed_time => params[:time])
+      redirect back
+    end
+    redirect '/'
   end
 end

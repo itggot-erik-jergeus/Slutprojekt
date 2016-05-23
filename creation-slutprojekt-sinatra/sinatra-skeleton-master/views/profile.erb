@@ -33,6 +33,11 @@
             <% elsif @parent%><%= @parent.details %><% end %></textarea>
       <input type="submit" value="Update">
     </form>
+    <form action="/update_bed_time" method="post">
+      <label>Bed Time: </label><br>
+      <input type="text" name="time" value="<%= @user.bed_time.strftime("%H:%M")%>">
+      <button type="submit">Update</button>
+    </form>
   </div>
   <div class="manage_stuff_3"><h1 class="headline">Manage Planning Schedules</h1>
     <form action="/new_plan" method="post">
