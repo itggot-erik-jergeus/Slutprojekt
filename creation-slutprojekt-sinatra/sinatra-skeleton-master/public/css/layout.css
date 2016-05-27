@@ -3,6 +3,13 @@ body {
     font-size: 1em;
 }
 
+.logo {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .tabobjects {
     background-color: #0e0e0e;
     margin-left: -0.6%;
@@ -93,10 +100,6 @@ body {
     float: left;
 }
 
-.dropdown-objects {
-    float: left;
-}
-
 .btn-drop {
     font-size: inherit;
     font-weight: 600;
@@ -144,7 +147,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     background-color: #eeeeee;
-    width: 33%;
+    width: 450px;
     height: 100%;
     border: solid 2px #0e0e0e;
 }
@@ -152,6 +155,12 @@ body {
 .headline {
     margin-left: 20px;
     border-bottom: 2px solid;
+}
+
+#create_activity {
+    margin-top:2em;
+    margin-bottom:2em;
+    margin-left:100px;
 }
 
 .subline {
@@ -185,7 +194,7 @@ body {
 }
 
 .manage_stuff_1, .manage_stuff_2, .manage_stuff_3{
-    margin-left: 3em;
+    margin-left: 5%;
     width: 40%;
     height: 30%;
     float: left;
@@ -196,7 +205,7 @@ body {
 }
 
 .manage_stuff_2 {
-    margin-left: 10em;
+    margin-left: 10%;
     height: 264px;
 }
 
@@ -211,7 +220,7 @@ body {
     border-bottom: solid;
     margin-left: auto;
     margin-right: auto;
-    width: 10em;
+    width: 11em;
     text-align: center;
 }
 
@@ -245,7 +254,7 @@ body {
 
 .select_label {
     float: left;
-    padding: 0 1em;
+    padding: 0 5%;
     text-align: center;
 }
 
@@ -259,7 +268,241 @@ body {
 }
 
 .cross_img {
-    display:flex;
+    display: flex;
     justify-content: center;
-    width:20px;
+    width: 20px;
+}
+
+#calendar {
+    width:50%;
+    border: 2px solid black;
+}
+
+.calendar_header {
+    height: 5em;
+    width: 5em;
+    background: #363652;
+    color: #fff;
+    border: 1px solid black;
+}
+
+.calendar_data {
+    text-align: center;
+    border: none;
+    height: 3em;
+}
+/* For different resolutions */
+@media (max-width: 1000px) {
+    h1 {
+        font-size: x-large;
+    }
+    #dropdown_child {
+        margin-top: 10%;
+    }
+}
+@media (max-width: 800px) {
+    .activity_simple {
+        width: 300px;
+    }
+
+    .btn-white {
+        width: 6em;
+        height: 4em;
+    }
+
+    .btn-drop {
+        width: 6em;
+        height: 4em;
+    }
+
+    .manage_stuff_3 {
+        width: 80%;
+    }
+
+    #dropdown_child {
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 500px) {
+     .btn-white {
+         height: 2em;
+         width: 100%;
+     }
+     .btn-drop {
+        height: 2em;
+        width: 100%;
+     }
+     .btn-gray {
+         height: 2em;
+         width: 60%;
+         margin-right: -25%;
+         float:right;
+     }
+     .tabobjects {
+         height: 9em;
+     }
+     .navlist {
+         display: block;
+         margin-left: -3%;
+         width: 100%;
+         float:left;
+     }
+     .objects {
+         display: inline-block;
+         height: 35%;
+         width: 45%;
+         float: left;
+     }
+     .manage_stuff_1,.manage_stuff_2,.manage_stuff_3 {
+         width: 80%;
+     }
+     #manage_profile {
+         height: 70em;
+     }
+}
+@media (max-width: 320px) {
+    .btn-gray {
+        width: 100px;
+    }
+    .form_box {
+        width: 90%;
+    }
+    .form_row, .form_row_required {
+        margin-left: 10px;
+    }
+    #create_activity {
+        margin-left: 20px;
+    }
+}
+
+/* For JS Image Slider */
+
+#img_slider a {
+    color: #c48ec8;
+    -webkit-transition: color 0.25s cubic-bezier(0.860, 0.000, 0.070, 1.000);
+    -moz-transition: color 0.25s cubic-bezier(0.860, 0.000, 0.070, 1.000);
+    -o-transition: color 0.25s cubic-bezier(0.860, 0.000, 0.070, 1.000);
+    transition: color 0.25s cubic-bezier(0.860, 0.000, 0.070, 1.000); /* ease-in-out */
+}
+
+#img_slider button {
+    color: #FFF;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    background: #c48ec8;
+    padding: 8px 14px;
+}
+
+ul.animate {
+    -webkit-transition: -webkit-transform 0.75s cubic-bezier(0.860, 0.000, 0.070, 1.000);
+    -moz-transition: transform 0.75s cubic-bezier(0.860, 0.000, 0.070, 1.000);
+    -o-transition: transform 0.75s cubic-bezier(0.860, 0.000, 0.070, 1.000);
+    transition: transform 0.75s cubic-bezier(0.860, 0.000, 0.070, 1.000); /* ease-in-out */
+}
+
+.stage {
+    width: 76%;
+    margin: 0 auto;
+    padding: 0 12%;
+    text-align: center;
+    overflow: hidden;
+}
+
+.sldr {
+    max-width: 825px;
+    margin: 0 auto;
+    overflow: visible;
+    position: relative;
+    clear: both;
+    display: block;
+}
+
+.sldr > ul > li {
+    float: left;
+    display: block;
+    width: 825px;
+}
+
+div.skew {
+    max-width: 825px;
+    margin: 0 auto;
+
+    display: block;
+    overflow: hidden;
+
+    -webkit-transform: skewX(16deg);
+    -moz-transform: skewX(16deg);
+    -ms-transform: skewX(16deg);
+    transform: skewX(16deg);
+}
+
+div.skew > div.wrap {
+    display: block;
+    overflow: hidden;
+
+    -webkit-transform: skewX(-16deg);
+    -moz-transform: skewX(-16deg);
+    -ms-transform: skewX(-16deg);
+    transform: skewX(-16deg);
+
+    margin-left: -10.1%;
+    width: 122%;
+}
+
+.wrap img {
+    max-width: 1000px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.selectors {
+    margin-left: -45px;
+}
+
+.selectors li {
+    font-size: 46px;
+    line-height: 32px;
+    display: inline;
+    padding: 0 2px;
+}
+
+.selectors li a {
+    text-decoration: none;
+}
+
+.selectors li.focalPoint a {
+    color: #CCC;
+    cursor: default;
+}
+
+.captions div {
+    left: 200%;
+    position: fixed;
+    opacity: 0;
+
+    -webkit-transition: opacity 0.75s cubic-bezier(0.860, 0.000, 0.070, 1.000);
+    -moz-transition: opacity 0.75s cubic-bezier(0.860, 0.000, 0.070, 1.000);
+    -o-transition: opacity 0.75s cubic-bezier(0.860, 0.000, 0.070, 1.000);
+    transition: opacity 0.75s cubic-bezier(0.860, 0.000, 0.070, 1.000); /* ease-in-out */
+}
+
+.captions div.focalPoint {
+    opacity: 1;
+    left: inherit;
+    position: static;
+}
+
+.clear {
+    display: block;
+    width: 100%;
+    height: 0px;
+    overflow: hidden;
+    clear: both;
 }

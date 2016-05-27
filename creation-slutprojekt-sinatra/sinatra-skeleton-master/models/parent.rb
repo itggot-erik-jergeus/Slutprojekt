@@ -7,7 +7,6 @@ class Parent
   property :email_address, String, required: true, unique: true
   property :details, Text
 
-  has n, :relations
   has n, :user_requests
   has n, :users, :through => Resource
 end

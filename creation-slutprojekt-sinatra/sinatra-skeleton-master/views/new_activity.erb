@@ -1,6 +1,6 @@
 <div class="form_box">
-  <% if @parent %> <h1 style="text-align:center;" class="headline"><%= @child %></h1> <% end %>
-  <form style="margin-top:2em;margin-bottom:2em;" action="/create_activity" method="post">
+  <% if @parent %> <h1 style="text-align:center;margin-left:0;" class="headline"><%= @child %></h1> <% end %>
+  <form id="create_activity" action="/create_activity" method="post">
     <div class="form_row">
       <label class="activity_labels">Type: </label><br>
       <select name="type">

@@ -98,19 +98,38 @@ class App < Sinatra::Base
     erb :activity
   end
 
-  get '/activities/calendar' do
+  get '/activities/calendar/?' do
     if session[:user_id]
       @user = User.get(session[:user_id])
-      @activity = Activity.all(user_id: session[:user_id])
+      @activity = []
+      sort = []
+      for activity in Activity.all(user_id: session[:user_id])
+        sort << {:date => activity.date, :id => activity.id}
+      end
     elsif session[:parent_id]
       @parent = Parent.get(session[:parent_id])
+      @activity = []
+      sort = []
+      for child in @parent.users
+        for activity in Activity.all(user_id: child.id)
+          sort << {:date => activity.date, :id => activity.id}
+        end
+      end
+    else
+      redirect '/'
     end
+    sort.sort_by! do |item|
+      item[:date]
+    end
+    for item in sort
+      @activity << Activity.get(item[:id])
+    end
+    @date = Date.new(Date.today.year,Date.today.next_month.month,1)
     @event = true
-    @simple = true
+    @simple = false
     erb :activity
   end
 
-  # For User
   get '/new_activity/?' do
     if session[:user_id]
       @user = User.get(session[:user_id])
@@ -147,7 +166,9 @@ class App < Sinatra::Base
       activity = Activity.create(title: params[:title], type: params[:type], subject: params[:subject],
                       date: "#{params[:due_date]} #{params[:time]}", planning: params[:planning],
                       time: params[:length].to_i, hidden: hidden, parent: parent, user_id: session[:user_id])
-      activity.plan(plan_length: Plan.first(name: params[:planning], user_id: session[:user_id]).length)
+      if params[:planning] != "nil"
+        activity.plan(plan_length: Plan.first(name: params[:planning], user_id: session[:user_id]).length)
+      end
       redirect '/activities/simple'
     else
       parent = true
@@ -156,7 +177,9 @@ class App < Sinatra::Base
       activity = Activity.create(title: params[:title], type: params[:type], subject: params[:subject],
                       time: params[:length].to_i, date: date, planning: params[:planning],
                       hidden: false, parent: parent, user_id: user )
-      activity.plan(plan_length: Plan.first(name: params[:planning], user_id: user).length)
+      if params[:planning] != "nil"
+        activity.plan(plan_length: Plan.first(name: params[:planning], user_id: user).length)
+      end
     end
     redirect '/'
   end

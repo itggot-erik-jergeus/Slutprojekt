@@ -1,17 +1,17 @@
 <div id="manage_profile">
   <div class="manage_stuff_1"><h1 class="headline">Manage Subjects</h1>
     <form action="/new_subject" method="post">
-      <p class="form_row"><label class="subject_labels">Subject Name: </label><input type="text" name="subject">
+      <p class="form_row"><label class="subject_labels">Subject Name: </label><br><input type="text" name="subject"></p>
       <% if @parent %>
-      <label class="subject_labels">Child: </label>
+      <p class="form_row"><label class="subject_labels">Child: </label>
       <select name="child">
         <% for child in @children %>
             <option value="<%= child.username%>"><%= child.username%></option>
         <% end %>
       </select></p>
       <% end %>
-      <input type="submit" value="Create Subject">
-    </form>
+      <p class="form_row"><input class="btn-black" type="submit" value="Create Subject"></p>
+    </form><br>
     <% if @user %>
       <form action="/delete_subject" method="post">
       <h3 class="subline">Delete Subject</h3>
@@ -20,26 +20,28 @@
             <option value="<%= subject.name%>"><%= subject.name%></option>
           <% end %>
         </select>
-        <input type="submit" value="Remove">
+        <input class="btn-black" type="submit" value="Remove">
         </div>
     </form>
     <% end %>
   </div>
   <div class="manage_stuff_2"><h1 class="headline">My profile</h1>
-    <p><% if @user %><%= @user.username%>
+    <p class="form_row" style="margin-bottom: -20px;"><% if @user %><%= @user.username%>
           <% elsif @parent%><%= @parent.username %><% end %></p>
     <form action="/update_details" method="post">
-      <textarea name="details"><% if @user %><%= @user.details%>
-            <% elsif @parent%><%= @parent.details %><% end %></textarea>
-      <input type="submit" value="Update">
+      <p class="form_row"><textarea name="details"><% if @user %><%= @user.details%>
+            <% elsif @parent%><%= @parent.details %><% end %></textarea></p>
+      <p class="form_row"><input class="btn-black" type="submit" value="Update"></p>
     </form>
-    <form action="/update_bed_time" method="post">
-      <label>Bed Time: </label><br>
-      <input type="text" name="time" value="<%= @user.bed_time.strftime("%H:%M")%>">
-      <button type="submit">Update</button>
-    </form>
+    <% if @user %>
+      <form action="/update_bed_time" method="post">
+        <p class="form_row"><label>Bed Time: </label><br>
+        <input type="text" name="time" value="<%= @user.bed_time.strftime("%H:%M")%>"></p>
+        <p class="form_row"><button class="btn-black" type="submit">Update</button></p>
+      </form>
+    <% end %>
   </div>
-  <div class="manage_stuff_3"><h1 class="headline">Manage Planning Schedules</h1>
+  <div class="manage_stuff_3"><br><h1 class="headline">Manage Planning Schedules</h1>
     <form action="/new_plan" method="post">
       <p class="form_row_required"><label class="plan_labels">Title: </label><br><input type="text" name="title"></p>
       <p class="form_row_required"><label class="plan_labels">Interval Length (minutes): </label><br><input type="number" min="0" name="length"></p>
@@ -55,15 +57,18 @@
           <input id="choice3" type="radio" name="weekend" value="0">
         </label>
       </p>
+      <p class="form_row">
       <% if @parent %>
-          <label class="plan_labels">Child: </label>
+        <div id="dropdown_child">
+        <p class="form_row"><label class="plan_labels">Child: </label>
           <select name="child">
             <% for child in @children %>
                 <option value="<%= child.username%>"><%= child.username%></option>
             <% end %>
           </select>
+        </p></div>
       <% end %>
-      <br><p class="form_row"><input class="btn-black" type="submit" value="Create Plan"></p>
+      <p class="form_row"><input class="btn-black" type="submit" value="Create Plan"></p>
     </form>
     <% if @user %>
     <form action="/delete_plan" method="post">
@@ -74,7 +79,7 @@
             <option value="<%= plan.name%>"><%= plan.name%></option>
         <% end %>
       </select>
-      <input type="submit" value="Remove"></p>
+      <input class="btn-black" type="submit" value="Remove"></p>
     </form>
     <% end %>
   </div>

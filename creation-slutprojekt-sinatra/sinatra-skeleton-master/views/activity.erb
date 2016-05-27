@@ -1,14 +1,45 @@
-<div class="activity_simple">
-  <% for activity in @activity %>
-    <% unless @parent && activity.hidden == true %>
-      <div class="activity_<%= if activity.type == "Homework" then "homework" elsif activity.type == "Training" then "training" else "other" end %>"</div>
-        <div class="date"><%= activity.date.strftime('%a %d %b - %H:%M') %></div>
-        <div class="title"><%= activity.title %></div>
-          <form action="/activity/delete/" method="post">
-            <button class="cross" type="submit" name="id" value="<%= activity.id %>"><img class="cross_img" src="/img/cross.svg"></button>
-          </form>
-        <div class="subject"><% if activity.subject != "nil" %><%= activity.subject %><% else %>No Subject<% end %></div>
-      </div>
+<% if @simple %>
+  <div class="activity_simple">
+    <% if @activity == []%>
+    <p> You have no events! </p>
     <% end %>
-  <% end %>
-</div>
+    <% for activity in @activity %>
+      <% unless @parent && activity.hidden == true %>
+        <div class="activity_<%= if activity.type == "Homework" then "homework" elsif activity.type == "Training" then "training" else "other" end %>"</div>
+          <div class="date"><%= activity.date.strftime('%a %d %b - %H:%M') %></div>
+          <div class="title"><%= activity.title %></div>
+            <form action="/activity/delete/" method="post">
+              <button class="cross" type="submit" name="id" value="<%= activity.id %>"><img class="cross_img" src="/img/cross.svg"></button>
+            </form>
+          <div class="subject"><% if activity.subject != "nil" %><%= activity.subject %><% else %>No Subject<% end %></div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% else %>
+  <div class="activity_calendar">
+    <table id="calendar" align="center" border="10" cellpadding="2">
+      <h1 style="text-align:center;width:20%;margin-left:auto;margin-right:auto;" class="headline"><%= @date.prev_month.strftime('%B') %></h1>
+      <tr class="calendar_row">
+        <% 7.times do |day| %>
+            <th class="calendar_header"><%= @date.prev_month.next_day(day).strftime('%A') %></th>
+        <% end %>
+      </tr>
+      <% (@date.cweek-@date.prev_month.cweek).times do |week| %>
+          <tr class="calendar_row">
+            <% 7.times do |i| %>
+              <td <% if @date.prev_month.next_day(i) == Date.today%> style="border:1px solid gray;background: #d1d1d1;" <% end %><% if @date.prev_month.next_day(i).month == @date.month %>style="border:1px solid gray;"<% end %>class="calendar_data">
+                <%= @date.prev_month.next_day(i).mday %><br>
+              <% for event in @activity %>
+                <% if event.date.strftime('%a%d%b') == @date.prev_month.next_day(i).strftime('%a%d%b') %>
+                  <%= event.title %>
+                <% end %>
+              <% end %>
+              </td>
+            <% end %>
+          </tr>
+          <% @date = @date.next_day(7) %>
+      <% end %>
+    </table>
+  </div>
+<% end %>

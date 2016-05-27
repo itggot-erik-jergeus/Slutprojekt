@@ -9,7 +9,6 @@ class User
   property :bed_time, Time
 
 
-  has n, :relations
   has n, :activities
   has n, :plans
   has n, :parent_requests

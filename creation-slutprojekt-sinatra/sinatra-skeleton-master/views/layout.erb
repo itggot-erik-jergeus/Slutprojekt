@@ -5,17 +5,20 @@
   <title>SuperAwesomeWebsite</title>
   <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
   <link type="text/css" rel="stylesheet" href="/css/layout.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="/js/jquery.sldr.js"></script>
+  <script src="/js/main.js"></script>
 </head>
 <body>
   <% if @user || @parent %>
     <nav class="tabobjects">
       <ul class="navlist">
-        <li class="objects"><a href="/activities/simple"><button class="btn-white">Upcoming Events</button></a></li>
-        <% if @user %><li class="objects"><a href="/new_activity"><button class="btn-white">Add New Activity</button></a></li>
+        <li class="objects"><a href="/activities/simple"><button class="btn-white">Activities</button></a></li>
+        <% if @user %><li class="objects"><a href="/new_activity"><button class="btn-white">New Activity</button></a></li>
         <% elsif @parent %>
           <li class="objects">
-            <div class="dropdown-objects">>
-            <button class="btn-drop">Add New Activities</button>
+            <div class="dropdown-objects">
+            <button class="btn-drop">New Activity</button>
             <div class="dropdown-content">
               <% if @parent.users != []%>
                 <% for child in @parent.users %>
@@ -28,7 +31,7 @@
             </div
           </li>
         <% end %>
-        <li class="objects"><a href="/management"><button class="btn-white">Manage <%= if @user then "Parents" else "Children" end%></button></button></a></li>
+        <li class="objects"><a href="/management"><button class="btn-white"><%= if @user then "Parents" else "Children" end%></button></button></a></li>
         <li class="objects"><a href="/profile"><button class="btn-white">My Profile</button></a></li>
         <li class="objects"><form action="/log_out" method="post"><button type="submit" class="btn-gray">Log Out</button></form></li>
       </ul>
