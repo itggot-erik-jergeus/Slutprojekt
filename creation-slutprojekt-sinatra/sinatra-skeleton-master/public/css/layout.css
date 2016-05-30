@@ -117,7 +117,6 @@ body {
     position: absolute;
     background-color: #f9f9f9;
     border: 2px solid #545454;
-    margin-left: 0.68em;
     min-width: 7em;
     padding: 1em;
 }
@@ -181,7 +180,7 @@ body {
 
 #manage_profile, #manage_parents {
     width: 80%;
-    height: 55em;
+    height: 60em;
     margin-top: 2em;
     margin-left: auto;
     margin-right: auto;
@@ -190,7 +189,7 @@ body {
 }
 
 #manage_parents {
-    height: 45em;
+    height: 55em;
 }
 
 .manage_stuff_1, .manage_stuff_2, .manage_stuff_3{
@@ -201,12 +200,12 @@ body {
 }
 
 .manage_stuff_1 {
-    height: 264px;
+    height: 300px;
 }
 
 .manage_stuff_2 {
     margin-left: 10%;
-    height: 264px;
+    height: 300px;
 }
 
 .event_form {
@@ -317,6 +316,7 @@ body {
 
     .manage_stuff_3 {
         width: 80%;
+        margin-top: 40px;
     }
 
     #dropdown_child {
@@ -354,12 +354,23 @@ body {
          width: 45%;
          float: left;
      }
+     #manage_profile {
+         height: 1400px;
+     }
      .manage_stuff_1,.manage_stuff_2,.manage_stuff_3 {
          width: 80%;
      }
-     #manage_profile {
-         height: 70em;
+     .manage_stuff_2 {
+         margin-top: 50px;
      }
+     .manage_stuff_3 {
+         margin-top: 50px;
+     }
+}
+@media (max-width: 360px) {
+    .form_row, .form_row_required {
+        font-size: 1em;
+    }
 }
 @media (max-width: 320px) {
     .btn-gray {
@@ -370,6 +381,12 @@ body {
     }
     .form_row, .form_row_required {
         margin-left: 10px;
+    }
+    .manage_stuff_2 {
+        margin-top: 65px;
+    }
+    #manage_parents {
+        height: 62em;
     }
     #create_activity {
         margin-left: 20px;

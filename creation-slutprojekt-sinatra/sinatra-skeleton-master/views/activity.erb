@@ -1,7 +1,7 @@
 <% if @simple %>
   <div class="activity_simple">
     <% if @activity == []%>
-    <p> You have no events! </p>
+    <h1 style="margin-left: 5px;"> You have no events! </h1>
     <% end %>
     <% for activity in @activity %>
       <% unless @parent && activity.hidden == true %>

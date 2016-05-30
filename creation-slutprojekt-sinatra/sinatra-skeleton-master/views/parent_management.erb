@@ -8,7 +8,7 @@
         <button class="btn-black" type="submit">Find</button></div></p>
     </form>
     <% if @search != nil %>
-      <div class="form_row"><h3><%= @search.username %></h3>
+      <div class="form_row"><br><h3><%= @search.username %></h3>
       <p><%= @search.details %></p>
       <form action="/<%= if @user then "user" else "parent" end%>_request/" method="post">
         <div class="management_form">
@@ -41,7 +41,7 @@
         <form action="/remove_relative/<%= person.id %>/" method="post">
           <input class="btn-black" type="submit" value="Remove">
         </form>
-      </div>
+      </div><br>
     <% end %>
   </div>
 </div>
