@@ -11,7 +11,7 @@
             <form action="/activity/delete/" method="post">
               <button class="cross" type="submit" name="id" value="<%= activity.id %>"><img class="cross_img" src="/img/cross.svg"></button>
             </form>
-          <div class="subject"><% if activity.subject != "nil" %><%= activity.subject %><% else %>No Subject<% end %></div>
+          <div class="subject"><% if activity.subject != "nil" %><%= activity.subject %><% else %>No Subject<% end %><% if @parent %> (<%= User.first(id: activity.user_id).username %>)<% end %></div>
         </div>
       <% end %>
     <% end %>

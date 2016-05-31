@@ -8,6 +8,9 @@ class Seeder
     self.user_requests
     self.parent_requests
     self.activities
+
+    puts "Suggestion after seed: Create an activity with the standard planning schedule"
+
   end
 
   def self.users
@@ -34,18 +37,19 @@ class Seeder
   end
 
   def self.user_requests
-    UserRequest.create(time: DateTime.now, requester_id: 1, parent_id: 1)
+    UserRequest.create(time: DateTime.now, requester_id: 2, parent_id: 2)
   end
 
   def self.parent_requests
-    ParentRequest.create(time: DateTime.now, requester_id: 2, user_id: 2)
+    ParentRequest.create(time: DateTime.now, requester_id: 1, user_id: 1)
+    ParentRequest.create(time: DateTime.now, requester_id: 2, user_id: 1)
   end
 
   def self.activities
-    Activity.create(title: "English essay", type: "Homework", subject: "English", planning: "nil", time: 60, date: (DateTime.now+12), hidden: false, parent: false, user_id: 1)
-    Activity.create(title: "Programming test", type: "Homework", subject: "Programming", planning: "nil", time: 120, date: (DateTime.now+4), hidden: false, parent: false, user_id: 1)
+    Activity.create(title: "English essay", type: "Homework", subject: "English", planning: "nil", time: 120, date: (DateTime.now+12), hidden: false, parent: false, user_id: 1)
+    a = Activity.create(title: "Programming test", type: "Homework", subject: "Programming", planning: "nil", time: 300, date: (DateTime.now+15), hidden: false, parent: false, user_id: 1)
+    a.plan(plan_length: (Plan.first(name: "Standard", user_id: 1)).length)
     Activity.create(title: "Fest hos Mange", type: "Other", subject: "nil", planning: "nil", time: 0, date: (DateTime.now+1), hidden: true, parent: false, user_id: 2)
-    # Suggestion after seed: Create an activity with the standard planning
   end
 
 end
