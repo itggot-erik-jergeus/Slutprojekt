@@ -208,8 +208,6 @@ class App < Sinatra::Base
       for request in requests
         @requesters << User.get(request.requester_id)
       end
-      p "hej"
-      p @requesters
     end
     erb :parent_management
   end
